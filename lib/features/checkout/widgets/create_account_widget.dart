@@ -24,7 +24,7 @@ class CreateAccountWidget extends StatelessWidget {
                   height: 24, width: 30,
                   child: Checkbox(
                     visualDensity: VisualDensity.compact,
-                    side: MaterialStateBorderSide(
+                    side: MaterialStateBorderSide.resolveWith(
                             (states) => BorderSide(width: 2, color: Theme.of(context).primaryColor.withOpacity(0.10))),
                     checkColor: Colors.white,
                     value: checkoutController.isCheckCreateAccount,
