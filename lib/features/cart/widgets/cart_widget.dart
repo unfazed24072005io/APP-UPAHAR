@@ -56,7 +56,7 @@ class CartWidget extends StatelessWidget {
                     child: Checkbox(
                       key: UniqueKey(),
                       visualDensity: VisualDensity.compact,
-                      side: MaterialStateBorderSide(
+                      side: MaterialStateBorderSide.resolveWith(
                               (states) => BorderSide(width: 2, color: Theme.of(context).primaryColor.withOpacity(0.10))),
                       checkColor: Colors.white,
                       value: cartModel!.isChecked!,
