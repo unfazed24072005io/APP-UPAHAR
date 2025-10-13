@@ -12,19 +12,20 @@ import 'localization/app_localization.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize DI container
-  if (!kIsWeb) {
-    try {
-      await di.init(); // only initialize DI on non-web
-    } catch (_) {}
+  // Initialize DI container with better error handling
+  try {
+    if (!kIsWeb) {
+      await di.init();
+    }
+  } catch (e) {
+    debugPrint('DI Init Error: $e');
+    // Continue anyway to avoid blocking the app
   }
 
-  // Run app
   runApp(
     MultiProvider(
       providers: [
-        // minimal providers needed for SplashScreen
-        ChangeNotifierProvider(create: (_) => di.sl<SplashController>()),
+        ChangeNotifierProvider(create: (_) => SplashController()), // Create directly instead of using DI
       ],
       child: const MyApp(),
     ),
