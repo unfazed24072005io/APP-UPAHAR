@@ -1,3 +1,5 @@
+import 'package:get/get.dart'; // Add this import
+import 'package:flutter_sixvalley_ecommerce/features/splash/controllers/splash_controller.dart'; // Add this
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb; // detect web
 import 'package:flutter/material.dart';
