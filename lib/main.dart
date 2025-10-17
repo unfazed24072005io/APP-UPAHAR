@@ -3,28 +3,30 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/features/splash/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get.dart'; // ADD THIS
-
-// Remove DI import if it's causing issues, or create a simple fallback
 import 'package:flutter_sixvalley_ecommerce/features/splash/controllers/splash_controller.dart';
+import 'package:flutter_sixvalley_ecommerce/features/auth/controllers/auth_controller.dart';
 
 Future<void> main() async {
+  // ✅ Initialize Flutter binding FIRST
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize with error handling
+  // ✅ Error handling for any initialization
   try {
     if (!kIsWeb) {
-      // Try to initialize DI, but don't block if it fails
-      // await di.init();
+      // Add any platform-specific initialization here if needed
+      // await di.init(); // Uncomment if you have dependency injection
     }
   } catch (e) {
     debugPrint('Initialization error: $e');
   }
 
+  // ✅ Run the app with all required providers
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SplashController()),
+        ChangeNotifierProvider(create: (_) => AuthController()),
+        // Add other providers you need here
       ],
       child: const MyApp(),
     ),
@@ -37,8 +39,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Demo App',
+      title: 'Your App Name',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        // Add your theme data here
+      ),
       home: const SplashScreen(),
       builder: (context, child) {
         return MediaQuery(
